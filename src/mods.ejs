@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Violet Launcher</title>
+  <link rel="stylesheet" href="./styles/index.css" />
+  <link rel="stylesheet" href="./styles/mods.css" />
+</head>
+<body>
+  <div class="violet_window">
+    <img class="violet_window_minimize" src="assets/window_minimize.png" onclick="window.api.minimize()">
+    <img class="violet_window_close" src="assets/window_close.png" onclick="window.api.close()">
+  </div>
+
+  <div class="mods_container" id="modsContainer">
+    <span class="loading">Carregando mods...</span>
+  </div>
+
+  <div class="option_container">
+    <div>
+      <img class="option_settings" src="assets/button_back_violet.png" onclick="window.api.loadIndex()">
+    </div>
+  </div>
+
+  <script>
+    const modsContainer = document.getElementById('modsContainer');
+
+    function renderMods(mods) {
+      modsContainer.innerHTML = ''; 
+
+      if (mods.length === 0) {
+        modsContainer.innerHTML = '<span class="no_mods">Nenhum mod encontrado.</span>';
+        return;
+      }
+
+      mods.forEach(mod => {
+        const modDiv = document.createElement('div');
+        modDiv.className = 'mod_card';
+        modDiv.innerHTML = `
+          <span class="mod_name">${mod}</span>
+        `;
+        modsContainer.appendChild(modDiv);
+      });
+    }
+
+    window.api.getMods().then(mods => {
+      renderMods(mods);
+    }).catch((error) => {
+      console.error('Erro ao carregar mods:', error);
+      modsContainer.innerHTML = '<span class="error">Erro ao carregar mods. Tente novamente mais tarde.</span>';
+    });
+  </script>
+</body>
+</html>

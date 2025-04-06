@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Violet Launcher</title>
+  <link rel="stylesheet" href="./styles/index.css" />
+</head>
+<body>
+  <div class="violet_window">
+    <img class="violet_window_minimize" src="assets/window_minimize.png" onclick="window.api.minimize()">
+    <img class="violet_window_close" src="assets/window_close.png" onclick="window.api.close()">
+  </div>
+  <div class="violet_splash">
+    <img class="violet_logo" src="assets/logo_smp.png">
+  </div>
+  <div class="option_container">
+    <div>
+      <img class="option_settings" src="assets/button_settings_violet.png" onclick="window.api.loadSettings()">
+      <img class="option_mods" src="assets/button_mods_violet.png" onclick="window.api.loadMods()">
+    </div>
+    <img id="playButton"class="option_play" src="assets/menu_play_violet.png" onclick="handleLaunchClick()">
+    <div class="option_container_separator" style="gap: 20px;">
+      <div class="option_logged_as_container">
+        <span class="option_logged_as_text">Conectado como</span>
+        <span class="option_logged_as_username"><%= username%></span>
+      </div>
+      <img class="option_exit" src="assets/button_exit_violet.png" onclick="window.api.signOut(); window.location.href = 'login.ejs'">
+    </div>
+  </div>
+  <script>
+    function handleLaunchClick() {
+      const playButton = document.getElementById("playButton");
+  
+      playButton.style.cursor = "not-allowed";
+      playButton.style.pointerEvents = "none";
+      playButton.style.opacity = 0.6;
+  
+      window.api.launchGame();
+    }
+  
+    window.api.onGameExit(() => {
+      const playButton = document.getElementById("playButton");
+      playButton.style.cursor = "pointer";
+      playButton.style.pointerEvents = "auto";
+      playButton.style.opacity = 1;
+    });
+  </script>
+</body>
+</html>

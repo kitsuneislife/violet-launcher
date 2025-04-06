@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Violet Launcher</title>
+  <link rel="stylesheet" href="./styles/index.css" />
+  <link rel="stylesheet" href="./styles/login.css" />
+</head>
+<body>
+  <div class="violet_window">
+    <img class="violet_window_minimize" src="assets/window_minimize.png" onclick="window.api.minimize()">
+    <img class="violet_window_close" src="assets/window_close.png" onclick="window.api.close()">
+  </div>
+  <div class="login_container">
+    <div class="login_header">
+        <img class="login_logo" src="assets/logo_smp.png">
+    </div>
+    <form class="login_form">
+        <input class="login_input" type="text" id="username" placeholder="Usuário">
+        <input class="login_input" type="password" id="password" placeholder="Senha">
+        <div id="login-error" class="login_error" style="display: none;"></div>
+        <button type="submit">
+            <img class="login_button" src="assets/login_button.png">
+        </button>
+        <span class="create_account">Não tem uma conta? <a href="#" onclick="window.api.openExternalLink('https://account.ely.by/register')">Crie uma.</a></span>
+    </form>
+  </div>
+  <script>
+    const form = document.querySelector('.login_form');
+    const errorBox = document.getElementById('login-error');
+    const submitButton = form.querySelector('button');
+  
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+  
+      submitButton.disabled = true;
+      submitButton.style.cursor = 'not-allowed';
+      document.body.style.cursor = 'wait';
+  
+      try {
+        const response = await window.api.loginEly(username, password);
+  
+        if (response.success) {
+          errorBox.style.display = 'none';
+          window.api.loadIndex();
+        } else {
+          errorBox.textContent = response.message || 'Erro ao fazer login.';
+          errorBox.style.display = 'block';
+        }
+      } finally {
+        submitButton.disabled = false;
+        submitButton.style.cursor = 'pointer';
+        document.body.style.cursor = 'default';
+      }
+    });
+  </script>
+</body>
+</html>

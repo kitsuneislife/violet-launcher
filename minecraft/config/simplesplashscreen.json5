@@ -1,0 +1,32 @@
+{
+	// Enable/Disable the forge progress text shown at the bottom of the screen
+	"showProgressText": false,
+	// Change the design of the progress bar
+	"progressBarType": "Vanilla",
+	// Change the texture of the logo
+	"logoStyle": "Aspect1to1",
+	// Enable/Disable the background image
+	"backgroundImage": true,
+	// Change the color of the background
+	"backgroundColor": 13338848,
+	// Change the color of the progress bar
+	"progressBarColor": 16777215,
+	// Change the color of the progress bar frame
+	"progressFrameColor": 16777215,
+	// Change the mode of the custom loading bar
+	"customProgressBarMode": "Linear",
+	// Enable/Disable the custom progress bar background
+	"customProgressBarBackground": true,
+	// Reverse the Logo loading animation
+	"logoProgressReversed": false,
+	// Change the style of the boss loading bar
+	"bossBarType": "NOTCHED_6",
+	"textures": {
+		"BackgroundTexture": "background2.png",
+		"MojangLogo": "violet1x1.png",
+		"Aspect1to1Logo": "violet1x1.png",
+		"BossBarTexture": "textures/gui/bars.png",
+		"CustomBarTexture": "progressbar.png",
+		"CustomBarBackgroundTexture": "progressbar_background.png"
+	}
+}

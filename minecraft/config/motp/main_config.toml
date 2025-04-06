@@ -1,0 +1,35 @@
+
+["Global Settings"]
+	#The amount of levels the orb of leveling gives
+	level_per_orb = 1.0
+	#Bonus vp per level diminishing factor, the higher this is the less bonus vp you get per higher levels
+	vp_diminishing_factor = 20.0
+	#points_per_level
+	points_per_level = 1.0
+	#use_vanilla_xp
+	use_vanilla_xp = false
+	#on_death_reset
+	on_death_reset = false
+	#max_player_level
+	max_player_level = 500.0
+
+["Leveling Scale"]
+	#levels_scale_interval
+	levels_scale_interval = ["[range]0-50[rangeEnd][scale]1.1[scaleEnd]", "[range]51-100[rangeEnd][scale]1.05[scaleEnd]", "[range]101-200[rangeEnd][scale]1.01[scaleEnd]", "[range]201-500[rangeEnd][scale]1.001[scaleEnd]"]
+	#incase you didn't setup a level scale this value will be applied
+	levels_scale_default = 1.001
+	#first_level_vp
+	first_level_vp = 90.0
+
+["HUD Overlay"]
+	#show_vp_inaction_bar
+	show_vp_inaction_bar = true
+	#display_level
+	display_level_overlay = true
+	#display_vp
+	display_vp_overlay = true
+	#display_points
+	display_points_overlay = true
+	#global_stats_ui_color
+	global_stats_ui_color = "§6"
+

@@ -1,0 +1,37 @@
+
+.violet_window_minimize, .violet_window_close {
+    filter: invert(1);
+}
+
+.mods_container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 40px;
+    background-color: #eeeeee;
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .mod_card {
+    padding: 10px 15px;
+    border-bottom: 1px solid #a2a2a2;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mod_name {
+    font-weight: normal;
+    font-size: 16px;
+  }
+  
+  .mod_version {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .loading,
+  .no_mods {
+    color: #888;
+    font-style: italic;
+  }

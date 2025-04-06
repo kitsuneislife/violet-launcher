@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Violet Launcher</title>
+  <link rel="stylesheet" href="./styles/index.css" />
+  <link rel="stylesheet" href="./styles/settings.css" />
+</head>
+<body>
+  <div class="violet_window">
+    <img class="violet_window_minimize" src="assets/window_minimize.png" onclick="window.api.minimize()">
+    <img class="violet_window_close" src="assets/window_close.png" onclick="window.api.close()">
+  </div>
+
+  <div class="setting_container">
+    <div class="setting_separator">
+      <span class="setting_label">Alocação de memória</span>
+      
+      <div class="memory-slider-wrapper">
+        <input type="range" id="memorySlider" min="3" max="8" step="1" value="4">
+        <div class="slider-labels" id="sliderLabels"></div>
+      </div>
+
+      <span id="memoryValue">4 GB</span>
+      <span>O mínimo recomendado é de 4 GB alocados. <br> O Launcher não permite alocação maior que 60% da memória do sistema. </span>
+    </div>
+
+    <div class="setting_separator">
+      <span class="setting_label">Diretório do launcher</span>
+      <span class="setting_dir" id="launcherPath">C:\VioletLauncher</span>
+    </div>
+
+    <div class="setting_separator">
+      <span class="setting_minus">
+        Obrigado por estar jogando isso c: <br>
+        Com carinho, kitsune ♡ <br>
+        <a href="#" onclick="window.api.openExternalLink('https://github.com/kitsuneislife/violet-launcher')">Github</a>
+      </span>
+    </div>
+  </div>
+
+  <div class="option_container">
+    <img class="option_settings" src="assets/button_back_violet.png" onclick="saveSettings(); window.api.loadIndex()">
+  </div>
+
+  <script>
+    const memorySlider = document.getElementById('memorySlider');
+    const memoryValue = document.getElementById('memoryValue');
+    const launcherPath = document.getElementById('launcherPath');
+    const sliderLabels = document.getElementById('sliderLabels');
+
+    memorySlider.addEventListener('input', () => {
+      memoryValue.innerText = `${memorySlider.value} GB`;
+    });
+
+    function generateSliderLabels(min, max) {
+      sliderLabels.innerHTML = '';
+      for (let i = min; i <= max; i++) {
+        const label = document.createElement('span');
+        label.textContent = `${i}GB`;
+        sliderLabels.appendChild(label);
+      }
+    }
+
+    async function getSettings() {
+      const settings = await window.api.getSettings();
+
+      const maxMemory = Math.floor(settings.maxMemory);
+      const selectedMemory = settings.memory || 4;
+
+      memorySlider.max = maxMemory;
+      memorySlider.value = selectedMemory;
+      memoryValue.innerText = `${selectedMemory} GB`;
+
+      generateSliderLabels(parseInt(memorySlider.min), maxMemory);
+      launcherPath.innerText = settings.launcherPath;
+    }
+
+    function saveSettings() {
+      const selectedMemory = memorySlider.value;
+      const jvmArgs = [`-Xmx${selectedMemory}G`, "-Xms3G"];
+      window.api.saveSettings({ jvmArgs });
+    }
+
+    getSettings();
+  </script>
+</body>
+</html>

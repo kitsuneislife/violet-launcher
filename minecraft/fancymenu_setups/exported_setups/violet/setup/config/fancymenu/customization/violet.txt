@@ -1,0 +1,145 @@
+type = menu
+
+customization-meta {
+  identifier = %fancymenu:universal_layout%
+  randomgroup = 1
+  renderorder = foreground
+  randommode = false
+  randomonlyfirsttime = false
+}
+
+customization {
+  keepaspectratio = false
+  action = backgroundoptions
+}
+
+customization {
+  advanced_height = {"placeholder":"guiheight"}
+  path = kitsune/background_menu.jpg
+  orientation = top-left
+  x = 0
+  width = 640
+  action = addtexture
+  actionid = caa83755-6253-4479-9b0d-987c23e04cc01743791119558
+  y = 0
+  advanced_posx = 0
+  advanced_width = {"placeholder":"guiwidth"}
+  advanced_posy = 0
+  height = 325
+}
+
+customization {
+  advanced_height = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} * 0.2) / 3.33","decimal":"false"}}
+  orientation = top-left
+  restartbackgroundanimations = true
+  buttonaction = joinserver;violet.kitsuneis.life%btnaction_splitter_fm%
+  backgroundhovered = kitsune/menu_play_hover.png
+  label = 
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} / 2) + ({"placeholder":"guiwidth"} * 0.1)","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.2","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} / 2 - 14","decimal":"false"}}
+  loopbackgroundanimations = true
+  x = 0
+  width = 128
+  action = addbutton
+  actionid = 2171791b-ad0b-4b99-84e5-494da82d24a01743791277418
+  y = 0
+  backgroundnormal = kitsune/menu_play_violet.png
+  height = 38
+}
+
+customization {
+  advanced_height = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} * 0.2) / 3.33","decimal":"false"}}
+  orientation = top-left
+  restartbackgroundanimations = true
+  buttonaction = mimicbutton;net.minecraft.client.gui.screen.MainMenuScreen:button_compatibility_id:mc_titlescreen_options_button%btnaction_splitter_fm%
+  backgroundhovered = kitsune/menu_options_hover2.png
+  label = 
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} / 2) + ({"placeholder":"guiwidth"} * 0.1)","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.2","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} / 2 + 25","decimal":"false"}}
+  loopbackgroundanimations = true
+  x = 0
+  width = 128
+  action = addbutton
+  actionid = ba6f2e27-1e18-421c-b597-91809acf2e321743791621013
+  y = 0
+  backgroundnormal = kitsune/menu_options_violet.png
+  height = 38
+}
+
+customization {
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.06","decimal":"false"}}
+  orientation = top-left
+  restartbackgroundanimations = true
+  buttonaction = mimicbutton;net.minecraft.client.gui.screen.MainMenuScreen:button_compatibility_id:forge_titlescreen_mods_button%btnaction_splitter_fm%
+  backgroundhovered = kitsune/button_mods_hover_noshadow.png
+  label = 
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} / 2) + ({"placeholder":"guiwidth"} * 0.24)","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.06","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} / 2 + 65","decimal":"false"}}
+  loopbackgroundanimations = true
+  x = 0
+  width = 38
+  action = addbutton
+  actionid = 9b172cc1-3675-4181-afb3-7029385ee0ee1743792534126
+  y = 0
+  backgroundnormal = kitsune/button_mods_violet_noshadow.png
+  height = 38
+}
+
+customization {
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.06","decimal":"false"}}
+  orientation = top-left
+  restartbackgroundanimations = true
+  buttonaction = mimicbutton;net.minecraft.client.gui.screen.MainMenuScreen:button_compatibility_id:mc_titlescreen_language_button%btnaction_splitter_fm%
+  backgroundhovered = kitsune/button_language_hover_noshadow.png
+  label = 
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} / 2) + ({"placeholder":"guiwidth"} * 0.170)","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.06","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} / 2 + 65","decimal":"false"}}
+  loopbackgroundanimations = true
+  x = 0
+  width = 38
+  action = addbutton
+  actionid = a89fe25c-3a5a-4f32-83a6-b003970069ab1743792558037
+  y = 0
+  backgroundnormal = kitsune/button_language_violet_noshadow.png
+  height = 38
+}
+
+customization {
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.06","decimal":"false"}}
+  orientation = top-left
+  restartbackgroundanimations = true
+  buttonaction = quitgame%btnaction_splitter_fm%
+  backgroundhovered = kitsune/button_exit_hover_noshadow.png
+  label = 
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} / 2) + ({"placeholder":"guiwidth"} * 0.1)","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.06","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} / 2 + 65","decimal":"false"}}
+  loopbackgroundanimations = true
+  x = 0
+  width = 38
+  action = addbutton
+  actionid = 8b8fc8b6-44ab-44b1-9b30-57a999bc1b041743792559939
+  y = 0
+  backgroundnormal = kitsune/button_exit_violet_noshadow.png
+  height = 38
+}
+
+customization {
+  advanced_height = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} * 0.16)","decimal":"false"}}
+  path = kitsune/logo_smp.png
+  orientation = top-left
+  x = 0
+  width = 128
+  action = addtexture
+  actionid = 5ec2dc24-137a-48e4-a82b-632111800b9e1743807128011
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} / 2) + ({"placeholder":"guiwidth"} * 0.1)","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.2","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiheight"} / 2) - ({"placeholder":"guiheight"} * 0.38)","decimal":"false"}}
+  height = 102
+}
+
