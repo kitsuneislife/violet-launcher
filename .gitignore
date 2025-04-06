@@ -16,6 +16,8 @@ pids
 *.pid.lock
 
 # Dependency directories
+build
+internals
 jre-legacy
 minecraft
 node_modules
