@@ -1,19 +1,24 @@
 {
   "name": "violet-launcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "type": "module",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",  
     "dist": "electron-builder"
   },
   "keywords": [],
   "author": "kitsuneislife",
   "license": "GNU General Public License v3.0",
   "devDependencies": {
-    "electron": "^35.1.4"
+    "electron": "^26.2.4"
   },
   "dependencies": {
     "axios": "^1.8.4",
+    "ejs-electron": "^3.0.0",
+    "electron-is-dev": "^3.0.1",
+    "electron-updater": "^6.1.5",
     "boolean": "^3.2.0",
     "buffer-crc32": "^0.2.13",
     "cacheable-lookup": "^5.0.4",
@@ -26,9 +31,6 @@
     "define-properties": "^1.2.1",
     "detect-node": "^2.1.0",
     "ejs": "^3.1.10",
-    "ejs-electron": "^3.0.0",
-    "electron-is-dev": "^3.0.1",
-    "electron-updater": "^6.6.2",
     "end-of-stream": "^1.4.4",
     "env-paths": "^2.2.1",
     "es-define-property": "^1.0.1",
@@ -78,6 +80,9 @@
     "wrappy": "^1.0.2",
     "yauzl": "^2.10.0"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "build": {
     "appId": "com.kitsuneislife.violet",
     "productName": "Violet Launcher",
@@ -89,7 +94,8 @@
       }
     ],
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "build/icon.ico"
     },
     "nsis": {
       "oneClick": false,

@@ -19,7 +19,7 @@
         <input class="login_input" type="text" id="username" placeholder="Usuário">
         <input class="login_input" type="password" id="password" placeholder="Senha">
         <div id="login-error" class="login_error" style="display: none;"></div>
-        <button type="submit">
+        <button id="submitButton" type="submit">
             <img class="login_button" src="assets/login_button.png">
         </button>
         <span class="create_account">Não tem uma conta? <a href="#" onclick="window.api.openExternalLink('https://account.ely.by/register')">Crie uma.</a></span>
@@ -28,7 +28,7 @@
   <script>
     const form = document.querySelector('.login_form');
     const errorBox = document.getElementById('login-error');
-    const submitButton = form.querySelector('button');
+    const submitButton = document.getElementById('submitButton');
   
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -38,6 +38,7 @@
   
       submitButton.disabled = true;
       submitButton.style.cursor = 'not-allowed';
+      submitButton.style.opacity = 0.6;
       document.body.style.cursor = 'wait';
   
       try {
@@ -53,6 +54,7 @@
       } finally {
         submitButton.disabled = false;
         submitButton.style.cursor = 'pointer';
+        submitButton.style.opacity = 1;
         document.body.style.cursor = 'default';
       }
     });

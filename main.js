@@ -1,17 +1,19 @@
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
-const { fork } = require('child_process');
-const os = require('os');
-const fs = require('fs');
-const path = require('path');
-const axios = require('axios');
-const ejse = require('ejs-electron');
-const { isDev } = require('electron-is-dev');
-const { autoUpdater } = require('electron-updater');
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
+import { fork } from 'child_process';
+import os from 'os';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import axios from 'axios';
+import ejse from 'ejs-electron';
+import isDev from 'electron-is-dev';
+import autoUpdater from 'electron-updater';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const profilePath = path.join(__dirname, 'src/config/profile.json');
 const modsPath = path.join(__dirname, 'minecraft/mods');
 
-async function createWindow() {
+const createWindow = async () => {
   const win = new BrowserWindow({
     width: 1280 * 0.8,
     height: 720 * 0.8,
@@ -19,7 +21,7 @@ async function createWindow() {
     autoHideMenuBar: true,
     frame: false,
     transparent: true,
-    icon: path.join(__dirname, 'src/assets/violet1x1.png'),
+    icon: path.join(__dirname, 'build/icon.ico'),
     webPreferences: {
       contextIsolation: true,
       preload: path.join(__dirname, 'src/scripts/preload.js'),
@@ -28,54 +30,47 @@ async function createWindow() {
 
   try {
     const profileData = fs.existsSync(profilePath) ? JSON.parse(fs.readFileSync(profilePath, 'utf-8')) : {};
-    const { authorization } = profileData;
-    const { accessToken, clientToken } = authorization || {};
+    const { accessToken, clientToken } = profileData.authorization ?? {};
 
     if (accessToken && clientToken) {
-      const res = await axios.post('https://authserver.ely.by/auth/validate', { accessToken });
-
-      if (res.status === 200) {
+      const { status } = await axios.post('https://authserver.ely.by/auth/validate', { accessToken });
+      
+      if (status === 200) {
         const refreshRes = await axios.post('https://authserver.ely.by/auth/refresh', { accessToken, clientToken });
         
-        if (refreshRes.status === 200 && refreshRes.data.accessToken !== accessToken) {
+        if (refreshRes.data.accessToken !== accessToken) {
           profileData.authorization.accessToken = refreshRes.data.accessToken;
           fs.writeFileSync(profilePath, JSON.stringify(profileData, null, 2), 'utf-8');
         }
 
-        ejse.data('username', authorization.user.username);
+        ejse.data('username', profileData.authorization.user.username);
         return win.loadFile('src/index.ejs');
       }
     }
-    return win.loadFile('src/login.ejs');
   } catch (err) {
     console.error('Erro ao validar credenciais:', err.message);
-    return win.loadFile('src/login.ejs');
   }
-}
+  
+  return win.loadFile('src/login.ejs');
+};
 
-if (!isDev) {
-  const server = 'https://update.electronjs.org';
-  const feed = `${server}/kitsuneislife/violet-launcher/${process.platform}-${process.arch}/${app.getVersion()}`;
+const setupUpdater = () => {
+  if (isDev) return;
 
-  autoUpdater.setFeedURL({ url: feed });
+  autoUpdater.checkForUpdates();
 
-  autoUpdater.on('update-available', () => {
-    console.log('Atualização disponível.');
-  });
-
-  autoUpdater.on('update-downloaded', () => {
-    console.log('Atualização baixada. Aplicando...');
-    autoUpdater.quitAndInstall();
-  });
-
-  autoUpdater.on('error', (err) => {
-    console.error('Erro ao verificar/baixar atualização:', err);
-  });
-}
+  autoUpdater
+    .on('update-available', () => console.log('Atualização disponível.'))
+    .on('update-downloaded', () => {
+      console.log('Atualização baixada. Aplicando...');
+      autoUpdater.quitAndInstall();
+    })
+    .on('error', (err) => console.error('Erro ao verificar/baixar atualização:', err));
+};
 
 app.whenReady().then(() => {
   createWindow();
-  if (!require('electron-is-dev')) autoUpdater.checkForUpdates();
+  setupUpdater();
 });
 
 app.on('activate', () => {
@@ -86,22 +81,15 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-ipcMain.on('window-minimize', () => {
-  const win = BrowserWindow.getFocusedWindow();
-  win?.minimize();
-});
-
-ipcMain.on('window-close', () => {
-  const win = BrowserWindow.getFocusedWindow();
-  win?.close();
-});
+ipcMain.on('window-minimize', () => BrowserWindow.getFocusedWindow()?.minimize());
+ipcMain.on('window-close', () => BrowserWindow.getFocusedWindow()?.close());
 
 let gameProcess = null;
 
 ipcMain.on('launch-minecraft', (event) => {
   if (gameProcess) return console.log('O jogo já está em execução.');
 
-  const launcherPath = path.join(__dirname, 'src/scripts/launcher.js');
+  const launcherPath = path.join(__dirname, 'src/scripts/launcher.cjs');
   gameProcess = fork(launcherPath);
 
   gameProcess.on('exit', (code) => {
@@ -120,7 +108,14 @@ ipcMain.handle('open-external-link', async (event, url) => {
 ipcMain.on('load-index', () => {
   const win = BrowserWindow.getAllWindows()[0];
   if (win) {
-    ejse.data('username', require(profilePath).authorization.user.username);
+    try {
+      const profile = fs.existsSync(profilePath) ? JSON.parse(fs.readFileSync(profilePath, 'utf-8')) : null;
+      const username = profile?.authorization?.user?.username || 'Desconhecido';
+      ejse.data('username', username);
+    } catch (err) {
+      console.error('Erro ao carregar o index:', err);
+      ejse.data('username', 'Erro');
+    }
     win.loadFile('src/index.ejs');
   }
 });
@@ -168,11 +163,10 @@ ipcMain.handle('get-mods', async () => {
   }
 });
 
-const { loginEly } = require('./src/scripts/auth');
 ipcMain.handle('login-ely', async (event, username, password) => {
+  const {loginEly} = await import('./src/scripts/auth.cjs');
   try {
-    const data = await loginEly(username, password);
-    return { success: true, data };
+    return { success: true, data: await loginEly(username, password) };
   } catch (err) {
     return { success: false, message: err.message };
   }

@@ -1,6 +1,6 @@
 {
   "jvmArgs": [
-    "-Xmx4G",
+    "-Xmx3G",
     "-Xms3G"
   ]
 }
