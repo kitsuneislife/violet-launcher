@@ -10,8 +10,18 @@ import isDev from 'electron-is-dev';
 import autoUpdater from 'electron-updater';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const profilePath = path.join(__dirname, 'src/config/profile.json');
+const profilePath = path.join(app.getPath('userData'), 'profile.json');
 const modsPath = path.join(__dirname, 'minecraft/mods');
+
+const initializeProfile = () => {
+  if (!fs.existsSync(profilePath)) {
+    fs.writeFileSync(profilePath, JSON.stringify({
+      jvmArgs: ["-Xmx4G", "-Xms3G"],
+      authorization: {}
+    }));
+  }
+};
+initializeProfile();
 
 const createWindow = async () => {
   const win = new BrowserWindow({

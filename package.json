@@ -105,6 +105,12 @@
       "createStartMenuShortcut": true,
       "shortcutName": "Violet Launcher",
       "uninstallDisplayName": "Desinstalar Violet Launcher"
-    }
+    },
+    "extraResources": [
+      {
+        "from": "src/config/profile.example.json",
+        "to": "profile.example.json"
+      }
+    ]
   }
 }

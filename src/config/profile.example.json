@@ -1,0 +1,4 @@
+{
+    "jvmArgs": ["-Xmx4G", "-Xms3G"],
+    "authorization": {}
+  }

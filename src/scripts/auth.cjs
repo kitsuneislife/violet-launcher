@@ -1,3 +1,5 @@
+
+const { app } = require('electron');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
@@ -11,7 +13,7 @@ async function loginEly(username, password) {
     });
 
     const data = response.data;
-    const profilePath = path.join(__dirname, '../config/profile.json');
+    const profilePath = path.join(app.getPath('userData'), 'profile.json');
 
     let profileData = {};
     if (fs.existsSync(profilePath)) {
