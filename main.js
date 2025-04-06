@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell, autoUpdater } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { fork } = require('child_process');
 const os = require('os');
 const fs = require('fs');
@@ -19,6 +19,7 @@ async function createWindow() {
     autoHideMenuBar: true,
     frame: false,
     transparent: true,
+    icon: path.join(__dirname, 'src/assets/violet1x1.png'),
     webPreferences: {
       contextIsolation: true,
       preload: path.join(__dirname, 'src/scripts/preload.js'),
