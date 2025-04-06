@@ -1,9 +1,10 @@
+const { app } = require('electron');
 const { Client, Authenticator  } = require('minecraft-launcher-core');
 const path = require('path');
 const fs = require('fs');
 
 const launcher = new Client();
-const configPath = path.join(__dirname, '../config/profile.json');
+const configPath = path.join(app.getPath('userData'), 'profile.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
 const opts = {
