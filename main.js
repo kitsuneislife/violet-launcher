@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const ejse = require('ejs-electron');
+const { isDev } = require('electron-is-dev');
+const { autoUpdater } = require('electron-updater');
 
 const profilePath = path.join(__dirname, 'src/config/profile.json');
 const modsPath = path.join(__dirname, 'minecraft/mods');
@@ -50,7 +52,30 @@ async function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow);
+if (!isDev) {
+  const server = 'https://update.electronjs.org';
+  const feed = `${server}/kitsuneislife/violet-launcher/${process.platform}-${process.arch}/${app.getVersion()}`;
+
+  autoUpdater.setFeedURL({ url: feed });
+
+  autoUpdater.on('update-available', () => {
+    console.log('Atualização disponível.');
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    console.log('Atualização baixada. Aplicando...');
+    autoUpdater.quitAndInstall();
+  });
+
+  autoUpdater.on('error', (err) => {
+    console.error('Erro ao verificar/baixar atualização:', err);
+  });
+}
+
+app.whenReady().then(() => {
+  createWindow();
+  if (!require('electron-is-dev')) autoUpdater.checkForUpdates();
+});
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();

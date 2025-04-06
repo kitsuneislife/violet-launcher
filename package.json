@@ -1,13 +1,14 @@
 {
-  "name": "viole-tlauncher",
+  "name": "violet-launcher",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "electron-builder"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "kitsuneislife",
+  "license": "GNU General Public License v3.0",
   "devDependencies": {
     "electron": "^35.1.4"
   },
@@ -26,6 +27,8 @@
     "detect-node": "^2.1.0",
     "ejs": "^3.1.10",
     "ejs-electron": "^3.0.0",
+    "electron-is-dev": "^3.0.1",
+    "electron-updater": "^6.6.2",
     "end-of-stream": "^1.4.4",
     "env-paths": "^2.2.1",
     "es-define-property": "^1.0.1",
@@ -75,9 +78,8 @@
     "wrappy": "^1.0.2",
     "yauzl": "^2.10.0"
   },
-  "description": "",
   "build": {
-    "appId": "com.seunome.app",
+    "appId": "com.kitsuneislife.violet",
     "productName": "Violet Launcher",
     "publish": [
       {
