@@ -16,6 +16,8 @@ pids
 *.pid.lock
 
 # Dependency directories
+jre-legacy
+minecraft
 node_modules
 jspm_packages
 dist

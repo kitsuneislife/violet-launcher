@@ -1,5 +1,5 @@
 const { app } = require('electron');
-const { Client, Authenticator  } = require('minecraft-launcher-core');
+const { Client  } = require('minecraft-launcher-core');
 const path = require('path');
 const fs = require('fs');
 
