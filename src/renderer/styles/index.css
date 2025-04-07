@@ -34,7 +34,7 @@ body {
 
 .violet_splash {
     flex: 1;
-    background-image: url("../assets/background2.png");
+    background-image: url("../../assets/background2.png");
     background-size: cover;
     background-position: center bottom;
     display: flex;
@@ -57,7 +57,7 @@ body {
 .option_container {
     flex: 0 1 100px;
     background-color: #fff;
-    background-image: url("../assets/bg.png");
+    background-image: url("../../assets/bg.png");
     background-repeat: repeat;
     border-top: 1px solid black;
     display: flex;

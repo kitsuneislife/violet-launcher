@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>Violet Launcher</title>
-  <link rel="stylesheet" href="./styles/index.css" />
-  <link rel="stylesheet" href="./styles/mods.css" />
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/mods.css" />
 </head>
 <body>
   <div class="violet_window">
-    <img class="violet_window_minimize" src="assets/window_minimize.png" onclick="window.api.minimize()">
-    <img class="violet_window_close" src="assets/window_close.png" onclick="window.api.close()">
+    <img class="violet_window_minimize" src="../assets/window_minimize.png" onclick="window.api.minimizeWindow()">
+    <img class="violet_window_close" src="../assets/window_close.png" onclick="window.api.closeWindow()">
   </div>
 
   <div class="mods_container" id="modsContainer">
@@ -18,7 +18,7 @@
 
   <div class="option_container">
     <div>
-      <img class="option_settings" src="assets/button_back_violet.png" onclick="window.api.loadIndex()">
+      <img class="option_settings" src="../assets/button_back_violet.png" onclick="handleBackClick()">
     </div>
   </div>
 
@@ -43,12 +43,21 @@
       });
     }
 
-    window.api.getMods().then(mods => {
-      renderMods(mods);
-    }).catch((error) => {
-      console.error('Erro ao carregar mods:', error);
-      modsContainer.innerHTML = '<span class="error">Erro ao carregar mods. Tente novamente mais tarde.</span>';
-    });
+    async function loadMods() {
+      try {
+        const mods = await window.api.getMods();
+        renderMods(mods);
+      } catch (error) {
+        console.error('Erro ao carregar mods:', error);
+        modsContainer.innerHTML = '<span class="error">Erro ao carregar mods. Tente novamente mais tarde.</span>';
+      }
+    }
+
+    function handleBackClick() {
+      window.api.loadIndex();
+    }
+
+    loadMods();
   </script>
 </body>
-</html>
+</html> 

@@ -3,34 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <title>Violet Launcher</title>
-  <link rel="stylesheet" href="./styles/index.css" />
-  <link rel="stylesheet" href="./styles/login.css" />
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/login.css" />
 </head>
 <body>
   <div class="violet_window">
-    <img class="violet_window_minimize" src="assets/window_minimize.png" onclick="window.api.minimize()">
-    <img class="violet_window_close" src="assets/window_close.png" onclick="window.api.close()">
+    <img class="violet_window_minimize" src="../assets/window_minimize.png" onclick="window.api.minimizeWindow()">
+    <img class="violet_window_close" src="../assets/window_close.png" onclick="window.api.closeWindow()">
   </div>
   <div class="login_container">
     <div class="login_header">
-        <img class="login_logo" src="assets/logo_smp.png">
+        <img class="login_logo" src="../assets/logo_smp.png">
     </div>
-    <form class="login_form">
-        <input class="login_input" type="text" id="username" placeholder="Usuário">
-        <input class="login_input" type="password" id="password" placeholder="Senha">
+    <form class="login_form" id="loginForm">
+        <input class="login_input" type="text" id="username" placeholder="Usuário" required>
+        <input class="login_input" type="password" id="password" placeholder="Senha" required>
         <div id="login-error" class="login_error" style="display: none;"></div>
         <button id="submitButton" type="submit">
-            <img class="login_button" src="assets/login_button.png">
+            <img class="login_button" src="../assets/login_button.png">
         </button>
-        <span class="create_account">Não tem uma conta? <a href="#" onclick="window.api.openExternalLink('https://account.ely.by/register')">Crie uma.</a></span>
+        <span class="create_account">Não tem uma conta? <a href="#" onclick="handleCreateAccount()">Crie uma.</a></span>
     </form>
   </div>
   <script>
-    const form = document.querySelector('.login_form');
+    const form = document.getElementById('loginForm');
     const errorBox = document.getElementById('login-error');
     const submitButton = document.getElementById('submitButton');
   
-    form.addEventListener('submit', async (e) => {
+    async function handleLogin(e) {
       e.preventDefault();
   
       const username = document.getElementById('username').value;
@@ -57,7 +57,13 @@
         submitButton.style.opacity = 1;
         document.body.style.cursor = 'default';
       }
-    });
+    }
+  
+    function handleCreateAccount() {
+      window.api.openExternalLink('https://account.ely.by/register');
+    }
+  
+    form.addEventListener('submit', handleLogin);
   </script>
 </body>
-</html>
+</html> 

@@ -1,4 +1,10 @@
 {
     "jvmArgs": ["-Xmx4G", "-Xms3G"],
+    "gameVersion": "1.16.5",
+    "gameDir": null,
+    "javaPath": null,
+    "autoUpdate": true,
+    "language": "pt_BR",
+    "theme": "dark",
     "authorization": {}
-  }
+}

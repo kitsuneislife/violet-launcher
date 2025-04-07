@@ -104,3 +104,7 @@ A lista de mods presente no modpack. (EM CONSTRUÇÃO)
 | Tinker's Construct                 |                        | Server/Client  |                                                    |                                              |
 | Waystones                          |                        | Server/Client  |                                                    | Waystones_1.16.5-7.6.4.jar                   |
 | When Dungeons Arise                |                        | Server/Client  |                                                    | DungeonsArise-1.16.5-2.1.49-beta.jar         |
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.

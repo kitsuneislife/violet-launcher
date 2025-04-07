@@ -1,0 +1,24 @@
+{
+    "version": "1.16.5",
+    "resources": {
+        "jre-legacy": {
+            "url": "https://firebasestorage.googleapis.com/v0/b/kitsuneisodd.appspot.com/o/jre-legacy.zip?alt=media&token=6f0aa583-98d8-4005-a1e6-737278519b98",
+            "path": "jre-legacy",
+            "required": true
+        },
+        "minecraft": {
+            "url": "https://firebasestorage.googleapis.com/v0/b/kitsuneisodd.appspot.com/o/minecraft.zip?alt=media&token=d03aa44d-2bdb-4dfe-b0f1-5d22f9751bbd",
+            "path": "minecraft",
+            "required": true
+        },
+        "assets": {
+            "url": "https://firebasestorage.googleapis.com/v0/b/kitsuneisodd.appspot.com/o/assets.zip?alt=media&token=79c1728f-8963-413e-94a9-b928cc25811e",
+            "path": "assets",
+            "required": true
+        }
+    },
+    "memory": {
+        "min": "2G",
+        "max": "4G"
+    }
+} 

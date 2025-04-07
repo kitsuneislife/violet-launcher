@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Carregando - Violet Launcher</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            background-image: url(../assets/background2.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .loader-container {
+            width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+        }
+
+        .loader-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .loader-title {
+            font-size: 24px;
+            margin: 0;
+            color: #8a2be2;
+        }
+
+        .loader-logo {
+            width: 200px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .loader-subtitle {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+            font-style: italic;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background-color: #a2a2a2;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #9B559E;
+            transition: width 0.3s ease;
+        }
+
+        .status-text {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin: 10px 0;
+            font-size: 14px;
+            display: none;
+        }
+
+        .retry-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .retry-button:hover {
+            background-color: #9b4deb;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader-header">
+            <img class="loader-logo" src="../assets/logo_smp.png" alt="Violet Launcher">
+            <p class="loader-subtitle">Carregando recursos...</p>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="status-text" id="statusText">Preparando para download...</div>
+        <div class="error-message" id="errorMessage"></div>
+        <button class="retry-button" id="retryButton">Tentar Novamente</button>
+    </div>
+
+    <script>
+        const progressBar = document.getElementById('progressBar');
+        const statusText = document.getElementById('statusText');
+        const errorMessage = document.getElementById('errorMessage');
+        const retryButton = document.getElementById('retryButton');
+
+        function updateProgress(data) {
+            const { resourceName, progress } = data;
+            progressBar.style.width = `${progress}%`;
+            statusText.textContent = `Baixando ${resourceName}... ${progress}%`;
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            retryButton.style.display = 'block';
+            statusText.style.display = 'none';
+            progressBar.style.width = '0%';
+        }
+
+        function retry() {
+            errorMessage.style.display = 'none';
+            retryButton.style.display = 'none';
+            statusText.style.display = 'block';
+            statusText.textContent = 'Tentando novamente...';
+            window.api.retryDownload();
+        }
+
+        window.api.onDownloadProgress((data) => {
+            updateProgress(data);
+        });
+
+        window.api.onDownloadError((error) => {
+            showError(error);
+        });
+
+        retryButton.addEventListener('click', retry);
+    </script>
+</body>
+</html> 
