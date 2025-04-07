@@ -2,17 +2,17 @@
     "version": "1.16.5",
     "resources": {
         "jre-legacy": {
-            "url": "https://firebasestorage.googleapis.com/v0/b/kitsuneisodd.appspot.com/o/jre-legacy.zip?alt=media&token=6f0aa583-98d8-4005-a1e6-737278519b98",
+            "url": "https://www.dropbox.com/scl/fi/z18ubzgb14md5tae0gxpv/jre-legacy.zip?rlkey=vc5oh0tptvef28w9usor2pb1o&st=6bjy2wxt&dl=1",
             "path": "jre-legacy",
             "required": true
         },
         "minecraft": {
-            "url": "https://firebasestorage.googleapis.com/v0/b/kitsuneisodd.appspot.com/o/minecraft.zip?alt=media&token=d03aa44d-2bdb-4dfe-b0f1-5d22f9751bbd",
+            "url": "https://www.dropbox.com/scl/fi/gdgzhov4iwzk18rvzg1j0/minecraft.zip?rlkey=ej80tc54x3h7snidoitbdiuoz&st=iv35n2v4&dl=1",
             "path": "minecraft",
             "required": true
         },
         "assets": {
-            "url": "https://firebasestorage.googleapis.com/v0/b/kitsuneisodd.appspot.com/o/assets.zip?alt=media&token=79c1728f-8963-413e-94a9-b928cc25811e",
+            "url": "https://www.dropbox.com/scl/fi/09aypiepdy2ekrl1ea90e/assets.zip?rlkey=l873cxglecqb788z8e496loko&st=gqml8ixu&dl=1",
             "path": "assets",
             "required": true
         }
